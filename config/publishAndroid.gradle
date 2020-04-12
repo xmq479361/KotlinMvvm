@@ -1,0 +1,48 @@
+
+apply plugin: "com.jfrog.artifactory"
+apply plugin: 'maven-publish'
+
+publishing {//这段语句，是生成pom文件的task
+    publications {
+        pom_create(MavenPublication) {
+            artifactId = project.name
+            groupId = project.group
+            version = project.android.versionName
+//            print("groupId: $groupId, Version: $version, artifactId has: ${project.ext.has("artifactId")}")
+            if (project.ext.has("artifactId")){
+                artifactId = project.artifactId
+            }
+            if (project.ext.has("groupId")){
+                groupId = project.groupId
+            }
+            if (project.ext.has("version")){
+                version = project.ext.version
+            }
+            def _artifact = "$buildDir/outputs/aar/${project.getName()}-release.aar"
+            if (project.ext.has("artifact")){
+                _artifact = project.ext.artifact
+            }
+            println("\ngroupId:${project.android}, $groupId, Version: ${project.ext.has("version")}, $version, artifactId: ${project.name} =$artifactId")
+            groupId groupId
+            version version
+            artifactId artifactId
+//            // 这里获得aar 生成的位置和上传
+            artifact(_artifact)
+        }
+    }
+}
+
+artifactory {
+    publish {
+        contextUrl = "$REPO_URL"
+        repository {
+            repoKey = "GradleLocal"
+            username = "admin"
+            password = "Lxj1011Xmq"
+        }
+        defaults {
+            // 这里的 pom_create指向上面 publishing/publications/pom_create
+            publications('pom_create')
+        }
+    }
+}

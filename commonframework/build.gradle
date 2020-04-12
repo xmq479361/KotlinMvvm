@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion android.compileSdkVersion
+    buildToolsVersion android.buildToolsVersion
+//
+    defaultConfig {
+        minSdkVersion android.minSdkVersion
+        targetSdkVersion android.targetSdkVersion
+        testInstrumentationRunner android.testInstrumentationRunner
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    api project(":commonbase")
+    api "xmq.android:commonbase:${VerCommonBase}"
+    // Glide
+    api deps.glide.glide
+    // 下拉刷新
+    api deps.swiperefreshlayout
+    // 适配器
+    api deps.BaseRecyclerViewAdapterHelper
+
+    api deps.koin.core
+    api deps.koin.android
+    api deps.koin.android_core
+    api deps.koin.android_viewmodel
+
+    api deps.okhttp3.logging
+    api deps.rxjava.rxjava
+    api deps.rxjava.rxandroid
+    api deps.retrofit2.retrofit
+    api deps.retrofit2.adapter_rxjava
+    api deps.retrofit2.converter_gson
+
+    testImplementation deps.junit
+    androidTestImplementation deps.androidx.junit
+    androidTestImplementation deps.androidx.espresso_core
+}
+
+ext {
+    groupId="xmq.android"
+    version='0.0.1'
+}
+apply from: "$rootDir/config/publishAndroid.gradle"

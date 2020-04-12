@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion android.compileSdkVersion
+    buildToolsVersion android.buildToolsVersion
+//
+    defaultConfig {
+        minSdkVersion android.minSdkVersion
+        targetSdkVersion android.targetSdkVersion
+        testInstrumentationRunner android.testInstrumentationRunner
+        consumerProguardFiles 'consumer-rules.pro'
+        versionName "1.0.3"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.kotlin.kotlin_stdlib
+    implementation deps.androidx.core
+    implementation deps.androidx.appcompat
+
+    testImplementation deps.junit
+    androidTestImplementation deps.androidx.junit
+    androidTestImplementation deps.androidx.espresso_core
+}
+ext {
+//    artifactId = ''
+    groupId="xmq.android"
+    version='0.0.5'
+}
+apply from: "$rootDir/config/publishAndroid.gradle"

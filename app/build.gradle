@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-kapt"
+android {
+    compileSdkVersion android.compileSdkVersion
+    buildToolsVersion android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion android.minSdkVersion
+        targetSdkVersion android.targetSdkVersion
+        applicationId android.applicationId
+        versionCode android.versionCode
+        versionName android.versionName
+        testInstrumentationRunner android.testInstrumentationRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(":basic")
+//    api project(":commonbase")
+//    api project(":commonframework")
+    kapt deps.glide.compiler
+    // Banner 轮播
+    api 'com.youth.banner:banner:1.4.10'
+
+    api 'org.conscrypt:conscrypt-android:2.2.1'
+
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
+
+    testImplementation deps.junit
+    androidTestImplementation deps.androidx.junit
+    androidTestImplementation deps.androidx.espresso_core
+}

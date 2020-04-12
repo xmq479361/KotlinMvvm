@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    api project(":commonutils")
+    api "xmq.android:commonutils:$VerCommonUtils"
+//    implementation deps.kotlin.kotlin_stdlib
+//    implementation deps.androidx.appcompat
+//    implementation deps.androidx.core
+//    implementation deps.androidx.constraintlayout
+//    implementation deps.androidx.multidex
+//    api deps.androidx.legacy
+    implementation deps.androidx.material
+    implementation deps.gson
+
+//    implementation deps.androidx.recyclerview
+
+    implementation deps.androidx.lifecycle_viewmodel
+    implementation deps.androidx.lifecycle_extensions
+
+    implementation deps.kotlinx.coroutines
+    implementation deps.kotlinx.coroutines_android
+    // 日志
+    implementation deps.xlog
+
+    testImplementation deps.junit
+    androidTestImplementation deps.androidx.junit
+    androidTestImplementation deps.androidx.espresso_core
+}
+
+ext {
+    groupId="xmq.android"
+    version='0.0.1'
+}
+apply from: "$rootDir/config/publishAndroid.gradle"

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">WAndroid</string>
+    <string name="permission_denied">请授权</string>
+    <string name="home">首页</string>
+    <string name="system">体系</string>
+    <string name="navigation">导航</string>
+    <string name="project_type">项目分类</string>
+    <string name="me">我</string>
+    <string name="tool">工具</string>
+    <string name="blog">公众号</string>
+    <string name="search">搜索</string>
+    <string name="is_loading">正在加载...</string>
+    <string name="my_collect">我的收藏</string>
+    <string name="collect">收藏</string>
+    <string name="about">关于</string>
+    <string name="license">开源协议</string>
+</resources>

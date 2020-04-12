@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+//    apply from :"$rootDir/config/deps.gradle"
+    compileSdkVersion android.compileSdkVersion
+    buildToolsVersion android.buildToolsVersion
+//
+    defaultConfig {
+        minSdkVersion android.minSdkVersion
+        targetSdkVersion android.targetSdkVersion
+        targetSdkVersion android.testInstrumentationRunner
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+//    compileSdkVersion 29
+//    buildToolsVersion "29.0.2"
+////
+//    defaultConfig {
+//        minSdkVersion 19
+//        targetSdkVersion 29
+//    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(":commonframework")
+//    api project(":commonbase")
+
+    api deps.kotlin.kotlin_stdlib
+    api deps.androidx.appcompat
+    api deps.androidx.core
+    api deps.androidx.constraintlayout
+    api deps.androidx.multidex
+//    api deps.androidx.legacy
+    api deps.androidx.material
+    api deps.androidx.recyclerview
+
+    api deps.androidx.lifecycle_viewmodel
+    api deps.androidx.lifecycle_extensions
+
+    api deps.kotlinx.coroutines
+    api deps.kotlinx.coroutines_android
+    // 日志
+    api deps.xlog
+
+    testImplementation deps.junit
+    androidTestImplementation deps.androidx.junit
+    androidTestImplementation deps.androidx.espresso_core
+}
